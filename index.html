@@ -1,66 +1,127 @@
 <!DOCTYPE html>
+<html lang="uk">
 <head>
-  <title>Монетка Клікер!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Клікер Гра</title>
   <style>
+  
     body {
       margin: 0;
-      font-family: 'Fredoka', sans-serif;
-      background: linear-gradient(to top right, #fcd34d, #fbbf24);
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(-45deg, #ffcc00, #ffaa00, #ffe066, #ffd633);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: #333;
     }
 
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1 2;
-      background-color: #facc15;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      border-bottom: 4px solid #f59e0b;
+      background-color: rgba(255, 204, 0, 0.9);
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    .logo {
+    nav {
       display: flex;
-      align-items: center;
-      font-size: 1.8rem;
+      justify-content: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    nav button {
+      padding: 10px 25px;
+      font-size: 1.1em;
+      background-color: #fff;
+      border: 2px solid #ffcc00;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #ffcc00;
       color: #fff;
     }
 
-    .logo img {
-      width: 50px;
-      margin-right: 10px;
+    .screen {
+      display: none;
+      padding: 30px;
+      text-align: center;
     }
 
-    .nav-baton {
-      display: flex;
-      
+    .active {
+      display: block;
     }
 
-    .nav-buttons button {
-      background-color: #fcd34d;
-      border: none;
-      border-radius: 12px;
+    #coin {
+      font-size: 4em;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    #coin:active {
+      transform: scale(0.9);
+    }
+
+    #currency {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .shop-item {
+      background: linear-gradient(135deg, #ffe600, #ff9900);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 320px;
+      color: #fff;
+      font-size: 1.2em;
+    }
+
+    .shop-item button {
+      margin-top: 10px;
       padding: 10px 20px;
-      font-size: 1;
-      transition: background-color 0.3s;
+      background-color: #fff;
+      color: #333;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
 
-    .nav-buttons button:hover {
-      background-color: #fbbf24;
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="https://cdn-icons-png.flaticon.com/512/3208/3208722.png" alt="Монетка">
-      Монетка Кликер!
-    </div>
-    <div class="nav-buttons">
-      <button>Грати</button>
-      <button>Магазин</button>
-      <button>Профіль</button>
-    </div>
-  </header>
-</body>
-</html>
+
+<header>Клікер Гра</header>
+<nav>
+  <button onclick="switchScreen('game')">🎮 Грати</button>
+  <button onclick="switchScreen('shop')">🛒 Магазин</button>
+</nav>
+
+
+<div id="game" class="screen active">
+  <div id="currency"> Валюта: 0</div>
+  <div id="coin" onclick="earn()">🪙</div>
+</div>
+
+
