@@ -1,30 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+</html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clicker</title>
-    <link rel="stylesheet" href="style.css">
+  <title>Монетка Клікер!</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-    </header>
-    <main>
-        <div class="container">
-            <h1>Clicker Game</h1>
-            <div class="clicker">
-                <button id="click-button">Click me!</button>
-                <p id="click-count">Clicks: 0</p>
-            </div>
-            <div class="upgrades">
-                <h2>Upgrades</h2>
-                <button id="upgrade-button">Upgrade Click Power</button>
-                <p id="upgrade-cost">Cost: 10 clicks</p>
-            </div>
-        </div>
-        <script src="script.js"></script>
-    </main>
-    <footer></footer>
+  <header>
+    <div class="logo">
+      Монетка Кликер!
+    </div>
+    <div class="nav-buttons">
+      <button id="open-upgrades">прокачки</button>
+      <button>Профіль</button>
+    </div>
+  </header>
+  <body>
+    <div class="coinhavediv">
+  <p id="coinhave">в тебе є 0 монет</p>
+  </div>
+  <div class="centercoin">
+   <button id="coinclick" type="button"></button>
+   </div>
+  <div id="upgrade-menu" class="hidden">
+    <div class="upgrade-menu-content">
+      <button id="close-upgrades" class="close-btn">✖</button>
+      <h2>прокачки</h2>
+
+      <!-- Upgrade Item -->
+      <div class="upgrade-item">
+        <div class="upgrade-title">+1 монета за клік</div>
+        <button class="buy-btn" data-upgradetype="click" data-cost="25" data-multiplier="1.2" data-bonus="1" data-basiccost="25">купити</button>
+        <div class="upgrade-price">ціна: 25</div>
+      </div>
+      <div class="upgrade-item">
+      <div class="upgrade-title">+1 монета за секунду</div>
+        <button class="buy-btn" data-upgradetype="cps" data-cost="50" data-multiplier="1.1" data-bonus="1" data-basiccost="50">купити</button>
+        <div class="upgrade-price">ціна: 50</div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-title">+5 монет за клік</div>
+        <button class="buy-btn" data-upgradetype="click" data-cost="250" data-multiplier="1.25" data-bonus="5" data-basiccost="250">купити</button>
+        <div class="upgrade-price">ціна: 250</div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-title">отримуйте в 1.2 разів быльше монет за клік</div>
+        <button class="buy-btn" data-upgradetype="multcoin" data-cost="1000" data-multiplier="1.3" data-bonus="0.2" data-basiccost="1000">купити</button>
+        <div class="upgrade-price">ціна: 1000</div>
+      </div>
+       <div class="upgrade-item">
+      <div class="upgrade-title">+100 монет за секунду</div>
+        <button class="buy-btn" data-upgradetype="cps" data-cost="4500" data-multiplier="1.2" data-bonus="100" data-basiccost="4500">купити</button>
+        <div class="upgrade-price">ціна: 4500</div>
+      </div>
+        <div class="upgrade-item">
+        <div class="upgrade-title">отримуйте в 1.3 разів быльше монет за секунду</div>
+        <button class="buy-btn" data-upgradetype="multcps" data-cost="10000" data-multiplier="1.4" data-bonus="0.3" data-basiccost="10000">купити</button>
+        <div class="upgrade-price">ціна: 10000</div>
+      </div>
+      
+      </div>
+
+      <!-- You can duplicate this upgrade-item div for more upgrades -->
+    </div>
+  </div>
+  </body>
+  <script src="main.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js'></script>
 </body>
 </html>
-
