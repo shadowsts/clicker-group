@@ -11,18 +11,24 @@
       Монетка Кликер!
     </div>
     <div class="nav-buttons">
+      <button id="open-rebupgrades">прокачки переродження</button>
+      <button id="open-rebirth">переродження</button>
       <button id="open-upgrades">прокачки</button>
-      <button>Профіль</button>
+      <button>скіни</button>
     </div>
   </header>
+
   <body>
+    <div id="splash" class="hidden"></div>
     <div class="coinhavediv">
   <p id="coinhave">в тебе є 0 монет</p>
+  <p id="rebirthcoinhave" class="hidden">в тебе є 0 монет переродження</p>
   </div>
+  <div id="clonething"></div>
   <div class="centercoin">
    <button id="coinclick" type="button"></button>
    </div>
-  <div id="upgrade-menu" class="hidden">
+  <div id="upgrade-menu" class="hidden"> 
     <div class="upgrade-menu-content">
       <button id="close-upgrades" class="close-btn">✖</button>
       <h2>прокачки</h2>
@@ -48,9 +54,14 @@
         <div class="upgrade-price">ціна: 1000</div>
       </div>
        <div class="upgrade-item">
-      <div class="upgrade-title">+100 монет за секунду</div>
-        <button class="buy-btn" data-upgradetype="cps" data-cost="4500" data-multiplier="1.2" data-bonus="100" data-basiccost="4500">купити</button>
-        <div class="upgrade-price">ціна: 4500</div>
+      <div class="upgrade-title">+50 монет за секунду</div>
+        <button class="buy-btn" data-upgradetype="cps" data-cost="2000" data-multiplier="1.2" data-bonus="50" data-basiccost="2000">купити</button>
+        <div class="upgrade-price">ціна: 2000</div>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-title">отримуйте на 25% быльше монет за клік</div>
+        <button class="buy-btn" data-upgradetype="percentcoin" data-cost="7000" data-multiplier="1.5" data-bonus="1" data-basiccost="7000">купити</button>
+        <div class="upgrade-price">ціна: 7000</div>
       </div>
         <div class="upgrade-item">
         <div class="upgrade-title">отримуйте в 1.3 разів быльше монет за секунду</div>
@@ -60,6 +71,17 @@
       
       </div>
 
+    </div>
+  </div>
+  <div id="rebirth-menu" class="hidden">
+    <div class="rebirth-menu-content">
+      <button id="close-rebirth" class="close-btn">✖</button>
+      <p class="warning">УВАГА</p>
+      <p class="rebirth-text">при переродженні ти отримаєш монети переродження які потім зможеш витратити на потужні прокачки та чим більше в тебе монет тим більше ти отримаеш монет переродження</p>
+      <p class="rebirth-text">але також ти втратиш: всі свої монети та прокачки</p>
+      <p class="rebirth-text">для кожної наступної монети вам потрібно в 5 разів більше монет</p>
+      <p class="rebirth-text" id="getrebirthcoins-text">при переродженні зараз ти отримаеш: монет переродження</p>
+      <button id="rebirth-button">зробити переродження:100000</button>
     </div>
   </div>
   </body>
