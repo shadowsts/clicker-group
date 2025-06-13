@@ -23,6 +23,7 @@ function calculateRebirthCoins(gameCoins, totalRebirths) {
 let rebirthbutton = document.getElementById("rebirth-button")
 let Rebirths = 0
 let RebirthCoins = 0
+let openrebupgrades = document.getElementById("open-rebupgrades")
 let coinclick = document.getElementById('coinclick')
 let coins = 100000
 let coinlabel = document.getElementById("coinhave")
@@ -32,7 +33,9 @@ let coinmultiplier1 = 1
 let coinpersecond = 0
 let multipliercoinperclick = 1
 let percentcoin = 0
+let coinRebirthMulti = 1
 let container = document.getElementById("clonething")
+let RebirthCpsMulti = 1
 coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
 document.getElementById('open-upgrades').addEventListener('click', () => {
   document.getElementById('upgrade-menu').classList.remove('hidden'); // upgradesopn
@@ -41,6 +44,14 @@ document.getElementById('open-upgrades').addEventListener('click', () => {
 document.getElementById('close-upgrades').addEventListener('click', () => {
   document.getElementById('upgrade-menu').classList.add('hidden'); //upgradeclose
 });
+document.getElementById('open-rebupgrades').addEventListener('click', () => {
+  document.getElementById('rbupgrade-menu').classList.remove('hidden'); // rebirth upgrade
+});
+
+document.getElementById('rbclose-upgrades').addEventListener('click', () => {
+  document.getElementById('rbupgrade-menu').classList.add('hidden'); //rebirth upgrade
+});
+
 
 document.getElementById('open-rebirth').addEventListener('click', () => {
   document.getElementById('rebirth-menu').classList.remove('hidden'); // rebirth
@@ -51,7 +62,7 @@ document.getElementById('close-rebirth').addEventListener('click', () => {
   document.getElementById('rebirth-menu').classList.add('hidden'); //rebirth
 });
 coinclick.addEventListener("click",function () {
-    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin); // coin click
+    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti); // coin click
     coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
     coinclick.style.width = "270px"
     coinclick.style.height = "270px"
@@ -89,7 +100,7 @@ coinclick.addEventListener("click",function () {
 });
 setInterval(function() {
   if (coinpersecond >= 1){
-  coins += (coinpersecond * multipliercoinperclick);
+  coins += (coinpersecond * multipliercoinperclick * RebirthCpsMulti);
   coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
   coinlabel.style.backgroundColor = "#fff4c8"
        anime({
@@ -99,10 +110,10 @@ setInterval(function() {
        })}
 }, 1000);
 const buyButtons = document.querySelectorAll('.buy-btn');
-
+// пркоачки
 buyButtons.forEach(button => {
   button.addEventListener('click', () => {
-    const upgradeItem = button.closest('.upgrade-item');
+    const upgradeItem = button.closest('.upgrade-item'); // прокачки 
     const priceDiv = upgradeItem.querySelector('.upgrade-price');
 
     let cost = parseFloat(button.dataset.cost);
@@ -142,11 +153,48 @@ buyButtons.forEach(button => {
     }
   });
 });
+// прокачки переродження
+const RebirthbuyButtons = document.querySelectorAll('.rbbuy-btn');
+RebirthbuyButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const upgradeItem = button.closest('.rbupgrade-item');
+    const priceDiv = upgradeItem.querySelector('.upgrade-price');
+
+    let cost = parseFloat(button.dataset.cost);
+    const multiplier = parseFloat(button.dataset.multiplier);
+    let bonus = parseFloat(button.dataset.bonus)
+    let type = button.dataset.upgradetype
+
+    if (RebirthCoins >= cost){
+      if (type == "mult"){
+        RebirthCoins -= cost
+        coinRebirthMulti += bonus
+      } else if (type == "multcps"){
+        RebirthCoins -= cost
+        RebirthCpsMulti += bonus
+      }
+      upgradeItem.style.backgroundColor = "#ffffff"
+       anime({
+        targets: upgradeItem,
+        backgroundColor: "#f27cff",
+        duration: 3000,
+       })
+    cost = Math.floor(cost * multiplier);
+
+    button.dataset.cost = cost;
+
+    priceDiv.textContent = `ціна: ${cost} мп`;
+    rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет переродження`;
+    }
+  });
+});
+//зробити переродження
 rebirthbutton.addEventListener("click",function () {
 const result = calculateRebirthCoins(coins, Rebirths);
 if (result.rbcoinstogive >= 1 ) {
   if (RebirthCoins == 0){
     rebirthcoinlabel.classList.remove("hidden")
+    openrebupgrades.classList.remove("hidden")
   }
 RebirthCoins += result.rbcoinstogive
 coins = 0
@@ -175,7 +223,7 @@ buyButtons.forEach(button => {
     anime({
       targets: document.getElementById("splash"),     
       opacity: 1,          
-      duration: 3000, 
+      duration: 1000, 
       easing: 'easeInOutQuad',     
       complete: () => {
         anime({
