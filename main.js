@@ -23,15 +23,17 @@ function calculateRebirthCoins(gameCoins, totalRebirths) {
 let rebirthbutton = document.getElementById("rebirth-button")
 let Rebirths = 0
 let RebirthCoins = 0
+let currentbgimg = `https://pngimg.com/d/coin_PNG36871.png`
 let openrebupgrades = document.getElementById("open-rebupgrades")
 let coinclick = document.getElementById('coinclick')
-let coins = 100000
+let coins = 1000000000000
 let coinlabel = document.getElementById("coinhave")
 let rebirthcoinlabel = document.getElementById("rebirthcoinhave")
 let coinperclick = 1
 let coinmultiplier1 = 1
 let coinpersecond = 0
 let multipliercoinperclick = 1
+let multchance = 0
 let percentcoin = 0
 let coinRebirthMulti = 1
 let container = document.getElementById("clonething")
@@ -61,6 +63,13 @@ document.getElementById('open-rebirth').addEventListener('click', () => {
 document.getElementById('close-rebirth').addEventListener('click', () => {
   document.getElementById('rebirth-menu').classList.add('hidden'); //rebirth
 });
+document.getElementById('open-skins').addEventListener('click', () => {
+  document.getElementById('skin-menu').classList.remove('hidden'); // skins
+});
+
+document.getElementById("close-skins").addEventListener('click', () => {
+  document.getElementById('skin-menu').classList.add('hidden'); //skins
+});
 coinclick.addEventListener("click",function () {
     coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti); // coin click
     coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
@@ -83,6 +92,7 @@ coinclick.addEventListener("click",function () {
        // aaaaaaaaaaaaaaaaaa clone thingy aaaaaaaaaaaaaa
        const newcoinclone = document.createElement('button');
       newcoinclone.classList.add('coinclone');
+      newcoinclone.style.backgroundImage = `url("${currentbgimg}")`
       newcoinclone.style.top = "-30px"
       newcoinclone.style.left = `${randint(10,90)}%`;
       container.appendChild(newcoinclone);
@@ -120,8 +130,9 @@ buyButtons.forEach(button => {
     const multiplier = parseFloat(button.dataset.multiplier);
     let bonus = parseFloat(button.dataset.bonus)
     let type = button.dataset.upgradetype
-
-    if (coins >= cost){
+    const limit = button.dataset.limit
+    let limitbought = button.dataset.bought
+    if (coins >= cost && parseInt(limitbought) < parseInt(limit)){
       if (type == "multcoin"){
         coins -= cost
         coinmultiplier1 += bonus
@@ -144,12 +155,19 @@ buyButtons.forEach(button => {
         backgroundColor: "#ffe696",
         duration: 3000,
        })
+       button.dataset.bought = parseInt(limitbought) + 1
     cost = Math.floor(cost * multiplier);
 
     button.dataset.cost = cost;
-
-    priceDiv.textContent = `ціна: ${cost}`;
+    if (parseInt(button.dataset.bought)  == limit){
+        priceDiv.textContent = `макс`;
+        button.textContent = "макс"
     coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+       }else {
+        priceDiv.textContent = `ціна: ${cost}`;
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+       }
+
     }
   });
 });
@@ -164,14 +182,20 @@ RebirthbuyButtons.forEach(button => {
     const multiplier = parseFloat(button.dataset.multiplier);
     let bonus = parseFloat(button.dataset.bonus)
     let type = button.dataset.upgradetype
+     const limit = button.dataset.limit
+    let limitbought = button.dataset.bought
 
-    if (RebirthCoins >= cost){
+    if (RebirthCoins >= cost && parseInt(limitbought) < parseInt(limit)){
       if (type == "mult"){
         RebirthCoins -= cost
         coinRebirthMulti += bonus
       } else if (type == "multcps"){
         RebirthCoins -= cost
         RebirthCpsMulti += bonus
+      }
+      else if (type == "multchance"){
+        RebirthCoins -= cost
+        multchance += bonus
       }
       upgradeItem.style.backgroundColor = "#ffffff"
        anime({
@@ -180,12 +204,66 @@ RebirthbuyButtons.forEach(button => {
         duration: 3000,
        })
     cost = Math.floor(cost * multiplier);
+    button.dataset.bought = parseInt(limitbought) + 1
 
-    button.dataset.cost = cost;
-
-    priceDiv.textContent = `ціна: ${cost} мп`;
-    rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет переродження`;
+    button.dataset.cost = Math.floor(cost);
+    if (parseInt(button.dataset.bought)  == limit){
+        priceDiv.textContent = `макс`;
+        button.textContent = "макс"
+    rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(RebirthCoins)}  монет переродження`;
+       }else {
+        priceDiv.textContent = `ціна: ${cost} мп`;
+    rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(RebirthCoins)}  монет переродження`;
+       }
     }
+  });
+});
+// skin buy buy change change buy skin
+const buyskinButtons = document.querySelectorAll('.buy-skin-btn');
+buyskinButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const upgradeItem = button.closest('.skin-item'); 
+    const priceDiv = upgradeItem.querySelector('.skin-price');
+
+    let cost = parseFloat(button.dataset.cost);
+    let skin = button.dataset.skin
+    let type = button.dataset.costval
+    let ifbought = button.dataset.bought
+    if (ifbought == 1){
+      console.log(1)
+      coinclick.style.backgroundImage = `url("${skin}")`
+      currentbgimg = skin
+      upgradeItem.style.backgroundColor = "#faf5e4"
+       anime({
+        targets: upgradeItem,
+        backgroundColor: "#ffe696",
+        duration: 3000,
+       })
+    }
+    if (ifbought == 0){
+      if (type == "coin" && coins >= cost){
+        coins -= cost
+        ifbought = 1
+        coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+      }else if(type == "reb" && RebirthCoins >= cost){
+        RebirthCoins -= cost
+      ifbought = 1
+      rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(RebirthCoins)}  монет переродження`;
+      }
+      if (ifbought == 1){
+        button.dataset.bought = 1
+      upgradeItem.style.backgroundColor = "#faf5e4"
+       anime({
+        targets: upgradeItem,
+        backgroundColor: "#ffe696",
+        duration: 3000,
+       })
+      
+        priceDiv.textContent = `куплено`;
+        button.textContent = "натисніть щоб одіти"
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+
+    }}
   });
 });
 //зробити переродження
@@ -211,7 +289,7 @@ buyButtons.forEach(button => {
     let cost = parseFloat(button.dataset.cost);
     let basiccost = parseFloat(button.dataset.basiccost)
     cost = basiccost
-
+    button.dataset.bought = parseInt(0)
     button.dataset.cost = basiccost;
 
     priceDiv.textContent = `ціна: ${cost}`;})

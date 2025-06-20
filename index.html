@@ -14,7 +14,7 @@
       <button id="open-rebupgrades" class="hidden">прокачки переродження</button>
       <button id="open-rebirth">переродження</button>
       <button id="open-upgrades">прокачки</button>
-      <button>скіни</button>
+      <button id="open-skins">скіни</button>
     </div>
   </header>
 
@@ -35,37 +35,37 @@
 
       <div class="upgrade-item">
         <div class="upgrade-title">+1 монета за клік</div>
-        <button class="buy-btn" data-upgradetype="click" data-cost="25" data-multiplier="1.2" data-bonus="1" data-basiccost="25">купити</button>
+        <button class="buy-btn" data-upgradetype="click" data-cost="25" data-multiplier="1.2" data-bonus="1" data-basiccost="25" data-limit="50" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 25</div>
       </div>
       <div class="upgrade-item">
       <div class="upgrade-title">+1 монета за секунду</div>
-        <button class="buy-btn" data-upgradetype="cps" data-cost="50" data-multiplier="1.1" data-bonus="1" data-basiccost="50">купити</button>
+        <button class="buy-btn" data-upgradetype="cps" data-cost="50" data-multiplier="1.1" data-bonus="1" data-basiccost="50" data-limit="50" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 50</div>
       </div>
       <div class="upgrade-item">
         <div class="upgrade-title">+5 монет за клік</div>
-        <button class="buy-btn" data-upgradetype="click" data-cost="250" data-multiplier="1.25" data-bonus="5" data-basiccost="250">купити</button>
+        <button class="buy-btn" data-upgradetype="click" data-cost="250" data-multiplier="1.25" data-bonus="5" data-basiccost="250" data-limit="20" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 250</div>
       </div>
       <div class="upgrade-item">
-        <div class="upgrade-title">отримуйте в 1.2 разів быльше монет за клік</div>
-        <button class="buy-btn" data-upgradetype="multcoin" data-cost="1000" data-multiplier="1.3" data-bonus="0.2" data-basiccost="1000">купити</button>
+        <div class="upgrade-title">отримуйте в 1.2 разів быльше монет за клік (кожна наступна прокачка даэ +х1.2)</div>
+        <button class="buy-btn" data-upgradetype="multcoin" data-cost="1000" data-multiplier="1.3" data-bonus="0.2" data-basiccost="1000" data-limit="5" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 1000</div>
       </div>
        <div class="upgrade-item">
       <div class="upgrade-title">+50 монет за секунду</div>
-        <button class="buy-btn" data-upgradetype="cps" data-cost="2000" data-multiplier="1.2" data-bonus="50" data-basiccost="2000">купити</button>
+        <button class="buy-btn" data-upgradetype="cps" data-cost="2000" data-multiplier="1.2" data-bonus="50" data-basiccost="2000" data-limit="50" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 2000</div>
       </div>
       <div class="upgrade-item">
         <div class="upgrade-title">отримуйте на 25% быльше монет за клік</div>
-        <button class="buy-btn" data-upgradetype="percentcoin" data-cost="7000" data-multiplier="1.5" data-bonus="1" data-basiccost="7000">купити</button>
+        <button class="buy-btn" data-upgradetype="percentcoin" data-cost="7000" data-multiplier="1.5" data-bonus="1" data-basiccost="7000" data-limit="8" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 7000</div>
       </div>
         <div class="upgrade-item">
-        <div class="upgrade-title">отримуйте в 1.3 разів быльше монет за секунду</div>
-        <button class="buy-btn" data-upgradetype="multcps" data-cost="10000" data-multiplier="1.4" data-bonus="0.3" data-basiccost="10000">купити</button>
+        <div class="upgrade-title">отримуйте в 1.3 разів быльше монет за секунду (кожна прокачка даэ +х1.3)</div>
+        <button class="buy-btn" data-upgradetype="multcps" data-cost="10000" data-multiplier="1.4" data-bonus="0.3" data-basiccost="10000" data-limit="5" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 10000</div>
       </div>
       
@@ -91,19 +91,58 @@
 
       <div class="rbupgrade-item">
         <div class="upgrade-title">x2 монет за клік (кожна наступна прокачка +х1)</div>
-        <button class="rbbuy-btn" data-upgradetype="mult" data-cost="1" data-multiplier="2" data-bonus="1" data-basiccost="1">купити</button>
+        <button class="rbbuy-btn" data-upgradetype="mult" data-cost="1" data-multiplier="2" data-bonus="1" data-basiccost="1" data-limit="5" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 1 мп</div>
       </div>
       <div class="rbupgrade-item">
         <div class="upgrade-title">x2 монет за секунду (кожна наступна прокачка +х1)</div>
-        <button class="rbbuy-btn" data-upgradetype="multcps" data-cost="1" data-multiplier="2" data-bonus="1" data-basiccost="1">купити</button>
+        <button class="rbbuy-btn" data-upgradetype="multcps" data-cost="1" data-multiplier="2" data-bonus="1" data-basiccost="1" data-limit="5" data-bought="0">купити</button>
+        <div class="upgrade-price">ціна: 1 мп</div>
+      </div>
+      <div class="rbupgrade-item">
+        <div class="upgrade-title">кожен клік має 20% щоб дати х2 монет (кожна наступна прокачка +20%)</div>
+        <button class="rbbuy-btn" data-upgradetype="multchance" data-cost="1" data-multiplier="1" data-bonus="20" data-basiccost="1" data-limit="4" data-bought="0">купити</button>
         <div class="upgrade-price">ціна: 1 мп</div>
       </div>
       
       </div>
 
     </div>
+    <div id="skin-menu" class="hidden">
+  <div class="skin-menu-content">
+    <button id="close-skins" class="close-btn">✖</button>
+    <h2>Скіни</h2>
+    <div class="skin-item">
+      <div class="skin-title">класична монета</div>
+      <img src="https://pngimg.com/d/coin_PNG36871.png" class="skin-img">
+      <button class="buy-skin-btn" data-skin="https://pngimg.com/d/coin_PNG36871.png" data-bought="0"data-costval="coin"data-cost="1">купити</button>
+      <div class="skin-price">ціна: 1</div>
+    </div>
+
+    <div class="skin-item">
+      <div class="skin-title">срібна монета</div>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3v6U_2pvhGL6lT3CQJFW80LuEl9P8TrZQ6w&s" class="skin-img">
+      <button class="buy-skin-btn" data-skin="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3v6U_2pvhGL6lT3CQJFW80LuEl9P8TrZQ6w&s" data-bought="0"data-costval="coin"data-cost="500">купити</button>
+      <div class="skin-price">ціна: 500</div>
+    </div>
+
+    <div class="skin-item">
+      <div class="skin-title">монета переродження </div>
+      <img src="https://mario.wiki.gallery/images/thumb/a/a1/SMG_Asset_Model_Purple_Coin.png/120px-SMG_Asset_Model_Purple_Coin.png" class="skin-img">
+      <button class="buy-skin-btn" data-skin="https://mario.wiki.gallery/images/thumb/a/a1/SMG_Asset_Model_Purple_Coin.png/120px-SMG_Asset_Model_Purple_Coin.png"data-bought="0"data-costval="reb" data-cost="1">купити</button>
+      <div class="skin-price">ціна: 1 мп</div>
+    </div>
+    
+    <div class="skin-item">
+      <div class="skin-title">діамант</div>
+      <img src="https://thumbs.dreamstime.com/b/diamond-23709491.jpg" class="skin-img">
+      <button class="buy-skin-btn" data-skin="https://thumbs.dreamstime.com/b/diamond-23709491.jpg"data-bought="0"data-costval="coin" data-cost="10000000">купити</button>
+      <div class="skin-price">ціна: 10000000</div>
+    </div>
   </div>
+</div>
+  </div>
+
   </body>
   <script src="main.js"></script>
   <script src='https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js'></script>
