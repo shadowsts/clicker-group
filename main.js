@@ -23,7 +23,8 @@ function calculateRebirthCoins(gameCoins, totalRebirths) {
   return {
     rbcoinstogive
   };
-}
+} 
+let rcbooston = 0
 let rebirthbutton = document.getElementById("rebirth-button")
 let Rebirths = 0
 let RebirthCoins = 0
@@ -36,6 +37,7 @@ let rebirthcoinlabel = document.getElementById("rebirthcoinhave")
 let coinperclick = 1
 let coinmultiplier1 = 1
 let coinpersecond = 0
+let rbccboost = 1
 let multipliercoinperclick = 1
 let multchance = 0
 let percentcoin = 0
@@ -82,12 +84,15 @@ document.getElementById("close-skins").addEventListener('click', () => {
   document.getElementById('skin-menu').classList.add('hidden'); //skins
 });
 coinclick.addEventListener("click",function () {
-  if (randint(1,100) <= multchance){
-    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti * 2); // coin click
-  }else(
-    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti)
-  )
-    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+  if (rcbooston == 1){
+    rbccboost = 1 + RebirthCoins/10
+  }
+   if (randint(1,100) <= multchance){
+    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti * rbccboost * 2); // coin click
+  }else{
+    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti * rbccboost)
+  }
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
     coinclick.style.width = "270px"
     coinclick.style.height = "270px"
      anime({
@@ -126,7 +131,7 @@ coinclick.addEventListener("click",function () {
 setInterval(function() {
   if (coinpersecond >= 1){
   coins += (coinpersecond * multipliercoinperclick * RebirthCpsMulti);
-  coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+  coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
   coinlabel.style.backgroundColor = "#fff4c8"
        anime({
         targets: coinlabel,
@@ -177,10 +182,10 @@ buyButtons.forEach(button => {
     if (parseInt(button.dataset.bought)  == limit){
         priceDiv.textContent = `макс`;
         button.textContent = "макс"
-    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
        }else {
-        priceDiv.textContent = `ціна: ${cost}`;
-    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+        priceDiv.textContent = `ціна: ${cost.toLocaleString()}`;
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
        }
 
     }
@@ -211,6 +216,9 @@ RebirthbuyButtons.forEach(button => {
       else if (type == "multchance"){
         RebirthCoins -= cost
         multchance += bonus
+      }else if (type == "rcbooston"){
+        RebirthCoins -= cost
+        rcbooston += bonus
       }
       upgradeItem.style.backgroundColor = "#ffffff"
        anime({
