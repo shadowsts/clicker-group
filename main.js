@@ -306,7 +306,7 @@ buyButtons.forEach(button => {
     cost = basiccost
     button.dataset.bought = parseInt(0)
     button.dataset.cost = basiccost;
-
+    button.textContent = "купити"
     priceDiv.textContent = `ціна: ${cost}`;})
     coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
     rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(RebirthCoins)}  монет переродження`;
