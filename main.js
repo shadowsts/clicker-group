@@ -267,7 +267,7 @@ buyskinButtons.forEach(button => {
       if (type == "coin" && coins >= cost){
         coins -= cost
         ifbought = 1
-        coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+        coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
       }else if(type == "reb" && RebirthCoins >= cost){
         RebirthCoins -= cost
       ifbought = 1
@@ -284,7 +284,7 @@ buyskinButtons.forEach(button => {
       
         priceDiv.textContent = `куплено`;
         button.textContent = "натисніть щоб одіти"
-    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
 
     }}
   });
@@ -316,7 +316,7 @@ buyButtons.forEach(button => {
     button.dataset.cost = basiccost;
     button.textContent = "купити"
     priceDiv.textContent = `ціна: ${cost}`;})
-    coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+    coinlabel.textContent = `в тебе є  ${Math.floor(coins).toLocaleString()}  монет`;
     rebirthcoinlabel.textContent = `в тебе є  ${Math.floor(RebirthCoins)}  монет переродження`;
     document.getElementById("splash").classList.remove("hidden")
     rebirthbutton.textContent = `зробити переродження: ${Math.floor(100000 * Math.pow(1.25,Rebirths))}`
