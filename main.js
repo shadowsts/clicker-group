@@ -2,6 +2,10 @@
 function randint(min, max) {
     return Math.round(Math.random() * (max - min) + min)
 }
+function changeGradient(fromColor, toColor, border) {
+    document.body.style.background = `linear-gradient(to top right, ${fromColor}, ${toColor})`;
+        document.querySelector("header").style.borderBottomColor = border;
+  }
 function calculateRebirthCoins(gameCoins, totalRebirths) {
   const baseCost = 100000;
   const scale = 5;
@@ -39,6 +43,13 @@ let coinRebirthMulti = 1
 let container = document.getElementById("clonething")
 let RebirthCpsMulti = 1
 coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
+document.getElementById('open-bg').addEventListener('click', () => {
+  document.getElementById('bg-menu').classList.remove('hidden'); // bgopen
+});
+
+document.getElementById('close-bg').addEventListener('click', () => {
+  document.getElementById('bg-menu').classList.add('hidden'); //bgclose
+});
 document.getElementById('open-upgrades').addEventListener('click', () => {
   document.getElementById('upgrade-menu').classList.remove('hidden'); // upgradesopn
 });
@@ -71,7 +82,11 @@ document.getElementById("close-skins").addEventListener('click', () => {
   document.getElementById('skin-menu').classList.add('hidden'); //skins
 });
 coinclick.addEventListener("click",function () {
-    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti); // coin click
+  if (randint(1,100) <= multchance){
+    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti * 2); // coin click
+  }else(
+    coins += (coinperclick * coinmultiplier1 * 1.25**percentcoin * coinRebirthMulti)
+  )
     coinlabel.textContent = `в тебе є  ${Math.floor(coins)}  монет`;
     coinclick.style.width = "270px"
     coinclick.style.height = "270px"
@@ -314,3 +329,13 @@ buyButtons.forEach(button => {
 }
  )}
 })
+const changebg = document.querySelectorAll('#changebg');
+changebg.forEach(button => {
+  button.addEventListener('click', () => {
+    let color1 = button.dataset.col1
+    let color2 = button.dataset.col2
+    let color3 = button.dataset.border
+    changeGradient(color1,color2,color3)
+    
+});
+});
